@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Hello World</title>
+</head>
+
+<body>
+	<div id="root"></div>	
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<script src="../freact.js"></script>
+	<script type="text/jsx" data-presets="es2016,react">
+		/** @jsx freact.createElement */
+    class HelloMessage extends freact.Component {
+
+      constructor(props) {
+        super(props);
+        this.state = {
+          count: 1
+        };
+      }
+
+      handleClick() {
+        this.setState({
+          count: this.state.count + 1
+        });
+      }
+
+      render() {
+        const name = this.props.name;
+        const times = this.state.count;
+        return (
+          <div onClick={e => this.handleClick()}>
+            Hello {name + "!".repeat(times)}
+          </div>
+        );
+      }
+    }
+
+    freact.render(
+      <HelloMessage name="John" />,
+      document.getElementById('root')
+    );
+	</script>
+</body>
+
+</html>
